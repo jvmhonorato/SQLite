@@ -1,3 +1,7 @@
 1: npm init -y
 2: npm install sqlite3
-3: criar teste-cretate-table.js
+3: criar test-cretate-table.js
+4: criar test-create-category.js
+5: criar test-update-category.js
+6: criar test-remove-category.js
+7: baixar em sqlite browser abrir banco de dados criado pra consultar se deu certo

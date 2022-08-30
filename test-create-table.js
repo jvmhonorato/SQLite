@@ -23,16 +23,15 @@ const run = (db, query) => new Promise((resolve,reject)=> {
 const createTables = async() => {
     const db = await initDB('banco.sqlite3')
      await run(db,`
-        CREATE TABLE    categories_products (
-            product_id INTEGER REFERENCES products(id),
-            category_id INTEGER REFERENCES categories(id)
-        
+        CREATE TABLE    categories (
+            id INTEGER PRIMARY KEY NOT NULL,
+            category TEXT
         );
     ` )
-   /*await run(db,`
+   await run(db,`
     CREATE TABLE    products (
         id INTEGER PRIMARY KEY NOT NULL,
-        product TEXT
+        product TEXT,
         price REAL
     );
 ` )
@@ -43,7 +42,7 @@ CREATE TABLE    images (
     url TEXT,
     product_id INTEGER REFERENCES products(id)
     );
-` )*/
+` )
     console.log(' table created')
 }
 createTables().catch(err =>{
