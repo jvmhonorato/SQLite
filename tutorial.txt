@@ -4,4 +4,9 @@
 4: criar test-create-category.js
 5: criar test-update-category.js
 6: criar test-remove-category.js
+7: criar test-list-category.js
+8: criar test- list-product.js
+9: criar test-create-product.js
+10: criar test-upddate-product.js
+11: cria test-list-product-from-category.js
 7: baixar em sqlite browser abrir banco de dados criado pra consultar se deu certo

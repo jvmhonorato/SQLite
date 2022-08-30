@@ -20,14 +20,14 @@ const run = (db, query, values) => new Promise((resolve,reject)=> {
 })
 
 
-const removeCategories = async() => {
+const updateProducts = async() => {
     const db = await initDB('banco.sqlite3')
 
-    //DELETE DATA 
-    await run(db, `delete from categories where id=?`, [8])
+    //UPDATE DATA 
+    await run(db, `update products set product=? where id=?`, ['product updated', 8])
      
-    console.log(' category deleted')
+    console.log(' product updated')
 }
-removeCategories().catch(err =>{
+updateProducts().catch(err =>{
     console.log(err)
 })

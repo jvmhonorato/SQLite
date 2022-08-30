@@ -9,25 +9,25 @@ const initDB = databaseFile => new Promise((resolve,reject)=>{
         }
   })
 })
-const run = (db, query, values) => new Promise((resolve,reject)=> {
-    db.run(query,values, err => {
+const run = (db, query) => new Promise((resolve,reject)=> {
+    db.all(query, (err, rows) => {
         if(err){
             reject(err)
         }else{
-          resolve()  
+          resolve(rows)  
         }
     })
 })
 
 
-const removeCategories = async() => {
+const listCategories = async() => {
     const db = await initDB('banco.sqlite3')
 
-    //DELETE DATA 
-    await run(db, `delete from categories where id=?`, [8])
+    //LIST DATA
+    const categories = await run(db, `select * from categories `)
      
-    console.log(' category deleted')
+    console.log(' category listed', categories)
 }
-removeCategories().catch(err =>{
+listCategories().catch(err =>{
     console.log(err)
 })
