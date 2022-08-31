@@ -36,6 +36,28 @@ return products.map(products => {
     
 
 }
+
+const findAllByCategory = async(categoryId) => {
+    const dbConn = await db.init(database)
+    // return await db.query(dbConn,`select * from products left join images on product_id	= images.product_id`)
+const products = await  db.query(dbConn,`select * from products where id in (select product_id from categories_products where category_id = ${categoryId})`)
+const condition = products.map(produto => produto.id).join(',')
+const images = await db.query(dbConn,'select * from images where product_id in ('+condition+') group by product_id')
+const mapImages = images.reduce((antigo, atual)=> {
+    return {
+        ...antigo,
+        [atual.product_id]: atual
+    }
+},{})
+return products.map(products => {
+    return {
+        ...products,
+        image: mapImages[products.id]
+    }
+})
+    
+
+}
 //REMOVE PRODUCTS
 const remove = async(id) => {
     const dbConn = await db.init(database)
@@ -50,6 +72,16 @@ const update = async(id,data) => {
      
    
 }
+
+updateCategories = async(id, categories) => {
+    const dbConn = await db.init(database)
+    await db.queryWithParams(dbConn, `delete from categories_products where product_id = ?`, [id])
+    for await(const category of categories){
+        await db.queryWithParams(dbConn, `insert into categories_products (product_id,category_id) values(?,?)`,[id, category])
+     }
+   
+}
+
 const findAllPaginated = async({pageSize = 1, currentPage = 0}) => {
      const dbConn = await db.init(database)
     //primeiro parâmetro pageSize(quantos pulam) o segundo currentPage(qunatos serão mostrados) obs: ${currentPage*pageSIze},${pageSize}
@@ -83,9 +115,11 @@ const findAllPaginated = async({pageSize = 1, currentPage = 0}) => {
 return  {
     findAll,
     findAllPaginated,
+    findAllByCategory,
     remove,
     create,
     update,
+    updateCategories,
     addImage
     
 } 

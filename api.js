@@ -22,8 +22,10 @@ const test = async()=> {
    //await products.update(1,['product test update', 120])
    //await products.remove(1)
 
-   console.log(await products.findAll())
-   console.log('cp: 0', await products.findAllPaginated({pageSize:2, currentPage: 1}))
+  //  console.log(await products.findAll())
+  //  console.log('cp: 0', await products.findAllPaginated({pageSize:2, currentPage: 1}))
+  // await products.updateCategories(5,[15,16])
+  console.log(await products.findAllByCategory(3))
 }
 
 test()
