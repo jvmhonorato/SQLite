@@ -18,3 +18,6 @@
 
 14: criar categories.js
 15; criar api.js
+16: refatorei categories.js coloquei o CRUD dentro de uma unica função cujo parametro database substitui o caminho do banco de dados, depois  passei o caminho do banco no arquivo api.js:
+ const categories = require('./categories')('./banco.sqlite3')
+ dessa forma categories servirá pra a chamada de qualquer banco de dados
