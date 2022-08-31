@@ -1,3 +1,5 @@
+0:baixar em sqlite browser abrir banco de dados criado pra consultar se deu certo
+
 1: npm init -y
 2: npm install sqlite3
 3: criar test-cretate-table.js
@@ -9,4 +11,10 @@
 9: criar test-create-product.js
 10: criar test-upddate-product.js
 11: cria test-list-product-from-category.js
-7: baixar em sqlite browser abrir banco de dados criado pra consultar se deu certo
+
+12: criar pasta poc e mover todos os tests pra la junto com o database
+
+13: criar db.js com configurções iniciais do db
+
+14: criar categories.js
+15; criar api.js
