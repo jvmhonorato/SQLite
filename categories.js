@@ -24,13 +24,17 @@ const update = async(id,data) => {
      
    
 }
-const findAllPaginated = async() => {
-    const pageSize = 2
-    const currentPage = 3
-    const dbConn = await db.init('./banco.sqlite3')
-    //primeiro parâmetro pageSize(quantos pulam) o segundo currentPage(qunatos serão mostrados)
-    return await db.query(dbConn, `select * from categories limit ${pageSize},${currentPage}`)
-     
+const findAllPaginated = async({pageSize = 1, currentPage = 0}) => {
+     const dbConn = await db.init('./banco.sqlite3')
+    //primeiro parâmetro pageSize(quantos pulam) o segundo currentPage(qunatos serão mostrados) obs: ${currentPage*pageSIze},${pageSize}
+    const records = await db.query(dbConn, `select * from categories limit ${pageSize * currentPage}, ${pageSize+1}`)
+    if(records.length > pageSize){
+        records.pop()
+    }
+    return {
+        data: records,
+        hasNext: records.length > pageSize
+    }
    
 }
 
